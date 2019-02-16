@@ -26,12 +26,6 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    if(this.state.touchCount >= 10){
-      (async () => {
-        const successSound = play(SOUNDS.successLong);
-        // this.props.navigation.navigate('Links');
-      })();
-    }
 
     return (
       <View style={styles.container}>
@@ -50,14 +44,28 @@ export default class HomeScreen extends React.Component {
     );
   }
 
+  _exerciceCompleted() {
+    (async () => {
+      const successSound = play(SOUNDS.successLong);
+    })();
+    this.props.navigation.navigate('Links');
+  }
+
   _handleScreenTouch = () => {
     const touchCount = this.state.touchCount + 1;
-    console.log(touchCount, 'touchCount++');
-
     console.log(`_handleScreenTouch called ${touchCount} times`);
-    this.setState({
-      touchCount: touchCount,
-    });
+
+    if (touchCount >= 10) {
+      this._exerciceCompleted();
+      this.setState({
+        touchCount: touchCount,
+        exerciseCompleted: true,
+      });
+    } else {
+      this.setState({
+        touchCount: touchCount,
+      });
+    }
 
     (async () => {
       console.log(this.state.touchCount, 'touchCount');
