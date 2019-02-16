@@ -1,10 +1,7 @@
 import React from 'react';
 import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { WebBrowser } from 'expo';
-// import { MonoText } from '../components/StyledText';
 import SOUNDS from '../constants/Sounds';
 import { play, randomPlay } from '../utils/sound';
-// import Sound from 'react-native-sound';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -20,66 +17,27 @@ export default class HomeScreen extends React.Component {
 
     // XXX Handle component lifecycle "didFocus" is executed between tabs change
     this.props.navigation.addListener('didFocus', () => {
-      // console.log('didFocus');
-
       (async () => {
-        const backgroundSound = randomPlay([SOUNDS.successShort]);
+        const introductionVoice = randomPlay([SOUNDS.introductionVoice]);
       })();
     });
 
     this._handleScreenTouch = this._handleScreenTouch.bind(this);
   }
 
-  // componentDidMount() {
-  //   this._sub = this.props.navigation.addListener(
-  //     'didFocus',
-  //     this._focusFirstTextInput
-  //   );
-  // }
-
-  // componentWillUnmount() {
-  //   this._sub.remove();
-  // }
-
   render() {
-    (async () => {
-      // const successSound = play(SOUNDS.successShort);
-    })();
-
-    // this._handleScreenTouch();
-
     if(this.state.touchCount >= 10){
       (async () => {
         const successSound = play(SOUNDS.successLong);
+        // this.props.navigation.navigate('Links');
       })();
     }
 
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          {/*<View style={styles.welcomeContainer}>*/}
-          {/*<Image*/}
-          {/*source={*/}
-          {/*__DEV__*/}
-          {/*? require('../assets/images/robot-dev.png')*/}
-          {/*: require('../assets/images/robot-prod.png')*/}
-          {/*}*/}
-          {/*style={styles.welcomeImage}*/}
-          {/*/>*/}
-          {/*</View>*/}
-
           <View style={styles.getStartedContainer}>
-            {/*{this._maybeRenderDevelopmentModeWarning()}*/}
-
             <Text style={styles.getStartedText}>Les Lapins Bagarreurs</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              {/*<MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>*/}
-            </View>
-
-            <Text style={styles.getStartedText}>
-              {/*Change this text and your app will automatically reload.*/}
-            </Text>
           </View>
 
           <View style={styles.helpContainer}>
@@ -88,50 +46,9 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          {/*<Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>*/}
-
-          {/*<View style={[styles.codeHighlightContainer, styles.navigationFilename]}>*/}
-          {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
-          {/*</View>*/}
-        </View>
       </View>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
-    );
-  };
 
   _handleScreenTouch = () => {
     const touchCount = this.state.touchCount + 1;
@@ -145,7 +62,7 @@ export default class HomeScreen extends React.Component {
     (async () => {
       console.log(this.state.touchCount, 'touchCount');
       const backgroundSound = await randomPlay([
-        SOUNDS.metal1,
+        // SOUNDS.metal1,
         SOUNDS.metal2,
       ]);
     })();
