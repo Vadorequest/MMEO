@@ -11,11 +11,31 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  render() {
+  constructor(...args) {
+    super(...args);
 
-    (async () => {
-      // const backgroundSound = randomPlay([SOUNDS.successShort]);
-    })();
+    // XXX Handle component lifecycle "didFocus" is executed between tabs change
+    this.props.navigation.addListener('didFocus', () => {
+      // console.log('didFocus')
+
+      (async () => {
+        const backgroundSound = randomPlay([SOUNDS.successShort]);
+      })();
+    });
+  }
+
+  // componentDidMount() {
+  //   this._sub = this.props.navigation.addListener(
+  //     'didFocus',
+  //     this._focusFirstTextInput
+  //   );
+  // }
+
+  // componentWillUnmount() {
+  //   this._sub.remove();
+  // }
+
+  render() {
     (async () => {
       // const successSound = play(SOUNDS.successShort);
     })();
