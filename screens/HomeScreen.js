@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Audio, WebBrowser } from 'expo';
+import { Image, Platform, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { WebBrowser } from 'expo';
 // import { MonoText } from '../components/StyledText';
 import SOUNDS  from '../constants/Sounds';
 import { play, randomPlay } from '../utils/sound';
@@ -12,31 +12,34 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
-    const soundObject = new Audio.Sound();
 
-    // Hacky but... Hackathon, ain't?
     (async () => {
-      const backgroundSound = randomPlay([SOUNDS.backgroundSample]);
+      // const backgroundSound = randomPlay([SOUNDS.successShort]);
     })();
+    (async () => {
+      // const successSound = play(SOUNDS.successShort);
+    })();
+
+    this._handleScreenTouch()
 
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+          {/*<View style={styles.welcomeContainer}>*/}
+            {/*<Image*/}
+              {/*source={*/}
+                {/*__DEV__*/}
+                  {/*? require('../assets/images/robot-dev.png')*/}
+                  {/*: require('../assets/images/robot-prod.png')*/}
+              {/*}*/}
+              {/*style={styles.welcomeImage}*/}
+            {/*/>*/}
+          {/*</View>*/}
 
           <View style={styles.getStartedContainer}>
             {/*{this._maybeRenderDevelopmentModeWarning()}*/}
 
-            <Text style={styles.getStartedText}>Mes Mains en Or</Text>
+            <Text style={styles.getStartedText}>Les Lapins Bagarreurs</Text>
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               {/*<MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>*/}
@@ -48,9 +51,9 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.helpContainer}>
-            {/*<TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>*/}
-            {/*<Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>*/}
-            {/*</TouchableOpacity>*/}
+            <TouchableOpacity onPress={this._handleScreenTouch} style={styles.helpLink}>
+            <Text style={styles.helpLinkText}>CLICK ME</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
 
@@ -96,6 +99,15 @@ export default class HomeScreen extends React.Component {
     WebBrowser.openBrowserAsync(
       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
     );
+  };
+
+  _handleScreenTouch = () => {
+    (async () => {
+      const backgroundSound = randomPlay([
+        SOUNDS.successLong,
+        SOUNDS.successShort,
+      ]);
+    })();
   };
 }
 
