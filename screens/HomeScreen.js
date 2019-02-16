@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { WebBrowser } from 'expo';
+import { Image, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Audio, WebBrowser } from 'expo';
+// import Sound from 'react-native-sound';
 
-import { MonoText } from '../components/StyledText';
+// import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -18,6 +11,19 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    const soundObject = new Audio.Sound();
+
+    // Hacky but... Hackathon, ain't?
+    (async () => {
+      try {
+        await soundObject.loadAsync(require('../assets/sounds/SampleAudio_0.4mb.mp3'));
+        await soundObject.playAsync();
+        //Your sound is playing!
+      } catch (error) {
+        // An error occurred!
+      }
+    })();
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -48,7 +54,7 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.helpContainer}>
             {/*<TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>*/}
-              {/*<Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>*/}
+            {/*<Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>*/}
             {/*</TouchableOpacity>*/}
           </View>
         </ScrollView>
@@ -57,7 +63,7 @@ export default class HomeScreen extends React.Component {
           {/*<Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>*/}
 
           {/*<View style={[styles.codeHighlightContainer, styles.navigationFilename]}>*/}
-            {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
+          {/*<MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>*/}
           {/*</View>*/}
         </View>
       </View>
@@ -93,7 +99,7 @@ export default class HomeScreen extends React.Component {
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
     );
   };
 }
