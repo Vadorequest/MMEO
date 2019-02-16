@@ -1,9 +1,10 @@
 import React from 'react';
 import { Image, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Audio, WebBrowser } from 'expo';
-// import Sound from 'react-native-sound';
-
 // import { MonoText } from '../components/StyledText';
+import SOUNDS  from '../constants/Sounds';
+import { play, randomPlay } from '../utils/sound';
+// import Sound from 'react-native-sound';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -15,13 +16,7 @@ export default class HomeScreen extends React.Component {
 
     // Hacky but... Hackathon, ain't?
     (async () => {
-      try {
-        await soundObject.loadAsync(require('../assets/sounds/SampleAudio_0.4mb.mp3'));
-        await soundObject.playAsync();
-        //Your sound is playing!
-      } catch (error) {
-        // An error occurred!
-      }
+      const backgroundSound = randomPlay([SOUNDS.background1]);
     })();
 
     return (
