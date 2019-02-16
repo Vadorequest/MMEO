@@ -16,7 +16,7 @@ export default class HomeScreen extends React.Component {
 
     // Hacky but... Hackathon, ain't?
     (async () => {
-      const backgroundSound = randomPlay([SOUNDS.background1]);
+      const backgroundSound = randomPlay([SOUNDS.backgroundSample]);
     })();
 
     return (
