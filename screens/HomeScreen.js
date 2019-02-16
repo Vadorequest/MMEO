@@ -1,9 +1,9 @@
 import React from 'react';
-import { Image, Platform, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { WebBrowser } from 'expo';
 // import { MonoText } from '../components/StyledText';
-import SOUNDS  from '../constants/Sounds';
-import { play, randomPlay } from '../utils/sound';
+import SOUNDS from '../constants/Sounds';
+import { randomPlay } from '../utils/sound';
 // import Sound from 'react-native-sound';
 
 export default class HomeScreen extends React.Component {
@@ -11,17 +11,23 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      touchCount: 0,
+    };
 
     // XXX Handle component lifecycle "didFocus" is executed between tabs change
     this.props.navigation.addListener('didFocus', () => {
-      // console.log('didFocus')
+      // console.log('didFocus');
 
       (async () => {
         const backgroundSound = randomPlay([SOUNDS.successShort]);
       })();
     });
+
+    this._handleScreenTouch = this._handleScreenTouch.bind(this);
   }
 
   // componentDidMount() {
@@ -40,20 +46,20 @@ export default class HomeScreen extends React.Component {
       // const successSound = play(SOUNDS.successShort);
     })();
 
-    this._handleScreenTouch()
+    // this._handleScreenTouch();
 
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           {/*<View style={styles.welcomeContainer}>*/}
-            {/*<Image*/}
-              {/*source={*/}
-                {/*__DEV__*/}
-                  {/*? require('../assets/images/robot-dev.png')*/}
-                  {/*: require('../assets/images/robot-prod.png')*/}
-              {/*}*/}
-              {/*style={styles.welcomeImage}*/}
-            {/*/>*/}
+          {/*<Image*/}
+          {/*source={*/}
+          {/*__DEV__*/}
+          {/*? require('../assets/images/robot-dev.png')*/}
+          {/*: require('../assets/images/robot-prod.png')*/}
+          {/*}*/}
+          {/*style={styles.welcomeImage}*/}
+          {/*/>*/}
           {/*</View>*/}
 
           <View style={styles.getStartedContainer}>
@@ -72,7 +78,7 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleScreenTouch} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>CLICK ME</Text>
+              <Text style={styles.helpLinkText}>CLICK ME</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -122,8 +128,17 @@ export default class HomeScreen extends React.Component {
   };
 
   _handleScreenTouch = () => {
+    const touchCount = this.state.touchCount + 1;
+    console.log(touchCount, 'touchCount++');
+
+    console.log(`_handleScreenTouch called ${touchCount} times`);
+    this.setState({
+      touchCount: touchCount,
+    });
+
     (async () => {
-      const backgroundSound = randomPlay([
+      console.log(this.state.touchCount, 'touchCount');
+      const backgroundSound = await randomPlay([
         SOUNDS.successLong,
         SOUNDS.successShort,
       ]);
