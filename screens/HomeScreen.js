@@ -3,7 +3,7 @@ import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from '
 import { WebBrowser } from 'expo';
 // import { MonoText } from '../components/StyledText';
 import SOUNDS from '../constants/Sounds';
-import { randomPlay } from '../utils/sound';
+import { play, randomPlay } from '../utils/sound';
 // import Sound from 'react-native-sound';
 
 export default class HomeScreen extends React.Component {
@@ -47,6 +47,12 @@ export default class HomeScreen extends React.Component {
     })();
 
     // this._handleScreenTouch();
+
+    if(this.state.touchCount >= 10){
+      (async () => {
+        const successSound = play(SOUNDS.successLong);
+      })();
+    }
 
     return (
       <View style={styles.container}>
@@ -139,8 +145,8 @@ export default class HomeScreen extends React.Component {
     (async () => {
       console.log(this.state.touchCount, 'touchCount');
       const backgroundSound = await randomPlay([
-        SOUNDS.successLong,
-        SOUNDS.successShort,
+        SOUNDS.metal1,
+        SOUNDS.metal2,
       ]);
     })();
   };
