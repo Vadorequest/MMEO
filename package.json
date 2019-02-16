@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "license": "MIT",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -20,6 +21,5 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
     "jest-expo": "^32.0.0"
-  },
-  "private": true
+  }
 }
