@@ -3,9 +3,10 @@ import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from '
 import SOUNDS from '../constants/Sounds';
 import { play, randomPlay } from '../utils/sound';
 
-export default class HomeScreen extends React.Component {
+export default class RabbitsMaterialScreen extends React.Component {
   static navigationOptions = {
     header: null,
+    title: 'RabbitsMaterialStack',
   };
 
   constructor(props) {
@@ -48,7 +49,7 @@ export default class HomeScreen extends React.Component {
     (async () => {
       const successSound = play(SOUNDS.successLong);
     })();
-    this.props.navigation.navigate('Links');
+    this.props.navigation.navigate('RabbitsMoveStack');
   }
 
   _handleScreenTouch = () => {
