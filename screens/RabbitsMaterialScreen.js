@@ -19,7 +19,7 @@ export default class RabbitsMaterialScreen extends React.Component {
     // XXX Handle component lifecycle "didFocus" is executed between tabs change
     this.props.navigation.addListener('didFocus', () => {
       (async () => {
-        const introductionVoice = randomPlay([SOUNDS.introductionVoice]);
+        const introductionVoice = randomPlay([SOUNDS.introductionVoiceRabbitsMaterial]);
       })();
     });
 
@@ -27,7 +27,6 @@ export default class RabbitsMaterialScreen extends React.Component {
   }
 
   render() {
-
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
