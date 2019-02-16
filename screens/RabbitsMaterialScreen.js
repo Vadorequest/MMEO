@@ -19,7 +19,7 @@ export default class RabbitsMaterialScreen extends React.Component {
     // XXX Handle component lifecycle "didFocus" is executed between tabs change
     this.props.navigation.addListener('didFocus', () => {
       (async () => {
-        const introductionVoice = randomPlay([SOUNDS.introductionVoiceRabbitsMaterial]);
+        const activityStart = await randomPlay([SOUNDS.activityStart]);
       })();
     });
 
@@ -46,7 +46,7 @@ export default class RabbitsMaterialScreen extends React.Component {
 
   _exerciceCompleted() {
     (async () => {
-      const successSound = play(SOUNDS.successLong);
+      const successSound = await play(SOUNDS.successLong);
     })();
     this.props.navigation.navigate('RabbitsMoveStack');
   }

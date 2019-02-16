@@ -16,7 +16,7 @@ export const play = async (file) => {
 
 export const randomPlay = async (files) => {
   const i = getRandomInt(files.length);
-  return play(files[i]);
+  return await play(files[i]);
 };
 
 function getRandomInt(max) {

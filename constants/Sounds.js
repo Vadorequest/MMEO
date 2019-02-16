@@ -1,5 +1,6 @@
 export default {
   backgroundSample: require(`../assets/sounds/SampleAudio_0.4mb.mp3`),
+  backgroundRing: require(`../assets/sounds/ring_ambiant.mp3`),
   successLong: require(`../assets/sounds/success_long.mp3`),
   successShort: require(`../assets/sounds/success_short.mp3`),
   metal1: require(`../assets/sounds/audio_metal.mp3`),
@@ -11,6 +12,7 @@ export default {
   vague: require(`../assets/sounds/audio-vague.mp3`),
 
   // Voices
+  activityStart: require(`../assets/sounds/jingle.mp3`),
   introductionVoiceRabbitsMaterial: require(`../assets/sounds/SampleAudio_0.4mb.mp3`), // TODO
   introductionVoiceRabbitsMove: require(`../assets/sounds/SampleAudio_0.4mb.mp3`), // TODO
 };

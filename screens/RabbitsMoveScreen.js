@@ -26,17 +26,22 @@ export default class RabbitsMoveScreen extends React.Component {
       jumpCount: 0,
       lastJump: null,
       accelerometerData: {},
+      backgroundRing: null,
     };
 
     // XXX Handle component lifecycle "didFocus" is executed between tabs change
     this.props.navigation.addListener('didFocus', () => {
       (async () => {
-        const introductionVoice = randomPlay([SOUNDS.introductionVoiceRabbitsMove]);
+        const activityStart = await randomPlay([SOUNDS.activityStart]);
+        const backgroundRing = await randomPlay([SOUNDS.backgroundRing]);
+        this.setState({
+          backgroundRing,
+        });
       })();
 
       this._subscription = Accelerometer.addListener(accelerometerData => {
         this.setState({ accelerometerData });
-        console.log(accelerometerData.y, this.state.lastJump)
+        // console.log(accelerometerData.y, this.state.lastJump)
         if (accelerometerData.y >= MAX_Y) {
           if (this.state.lastJump === JUMP_LOW) {
             this._handleJump();
@@ -44,8 +49,7 @@ export default class RabbitsMoveScreen extends React.Component {
           this.setState({
             lastJump: JUMP_HIGH,
           });
-        }
-        else if (accelerometerData.y <= MIN_Y) {
+        } else if (accelerometerData.y <= MIN_Y) {
           if (this.state.lastJump === JUMP_HIGH) {
             this._handleJump();
           }
@@ -111,10 +115,15 @@ export default class RabbitsMoveScreen extends React.Component {
 
   _exerciceCompleted() {
     (async () => {
-      const successSound = play(SOUNDS.successLong);
+      const successSound = await play(SOUNDS.successLong);
     })();
 
     this.props.navigation.navigate('Settings'); // TODO
+
+    if(this.state.backgroundRing){
+      console.log(this.state.backgroundRing)
+      this.state.backgroundRing.stopAsync();
+    }
   }
 }
 
